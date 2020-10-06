@@ -35,6 +35,9 @@ import { TimerNativeComponent } from './timer-native/timer.component';
     FormsModule,
     HttpModule
   ],
+  entryComponents:[
+    SimpleAlertViewComponent//indicamos a Angular que este componente ha de ser compilado, ya que no va a ser renderizado de manera natural, sino dinámica.
+  ],
   providers: [/*TimerService*/],//este timerService es un Singleton común a todos los componentes que lo usen.
   bootstrap: [AppComponent]
 })
