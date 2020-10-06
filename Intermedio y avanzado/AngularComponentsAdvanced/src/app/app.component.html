@@ -1,0 +1,67 @@
+<div>
+  
+  <app-tabs>
+    <app-tab title="Timers">
+      <app-timer *ngFor="let timer of timers" (onComplete)="showEndTimerAlert()" init="{{timer}}"></app-timer>
+      <button class="add" (click)="showAddTimer()">+</button>
+
+      <!-- 
+        <app-timer-native (onComplete)="logCountdownEnd()" init="30"></app-timer-native>
+        <app-timer-none (onComplete)="logCountdownEnd()" init="90"></app-timer-none> 
+      -->      
+    </app-tab>
+    <app-tab title="Crono">
+      Crono not available.
+    </app-tab>
+    <app-tab title="Alarm">
+      Alarm not available.
+    </app-tab>
+  </app-tabs>
+
+  <app-alert-view [hidden]="!isAddTimerVisible">
+    <!--
+      El contenido que haya aquí dentro se renderizará en <ng-content></ng-content> (alert-view.component.html).
+      Diferenciaremos dentro de estos con selector qué renderizar y dónde.
+    -->
+
+    <label>Set the number of seconds for your timer</label>
+    <input [(ngModel)]="time" type="number" #timerInput>
+
+    <h3 class="header">
+      Add new timer
+    </h3>
+
+    <button (click)="hideAddTimer()" class="cancel-button">Cancel</button>
+    <button (click)="submitAddTimer()">Ok</button>
+
+  </app-alert-view>
+
+  <!-- <app-alert-view [hidden]="!isEndTimerAlertVisible">
+    <h3>Timer ended</h3>
+    <div>Your countdown has finished</div>
+    <button (click)="hideEndTimerAlert()">Ok</button>
+  </app-alert-view> -->
+
+  
+  <!--
+    Con ng-template podemos crear un template que podamos instanciar tantas  veces 
+    como queramos con ng-containter y el selector ngTemplatreOutlet.
+  -->
+  <ng-template #timeEndTemplate let-message let-title="titleTemplate">
+    <!--
+      let-message y let-title indican que el template puede recibir estas dos propiedades desde fuera.
+      Haciendo let-title="title" estamos diciendo que la propiedad let-title se va a bindear con la propiedad llamada "titleTemplate"
+      que reciba el template.
+      
+      [title]="titleTemplate" está bindeando la propiedad title del componente app-simple-alert-view con la propiedad let-title, igual pasa con [message]
+
+      Usando [ngTemplateOutletContext] le podemos pasar los inputs alas propiedades del template.
+      $implicit 
+    -->
+    <app-simple-alert-view [title]="titleTemplate" [message]="message"></app-simple-alert-view>
+  </ng-template>
+
+  <ng-container [ngTemplateOutlet]="timeEndTemplate" [ngTemplateOutletContext]="{titleTemplate:'Game over', $implicit: 'Your countdown has finished!'}"></ng-container>
+
+</div>
+

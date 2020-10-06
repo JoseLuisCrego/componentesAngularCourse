@@ -1,0 +1,36 @@
+<div>
+  <div class="background"></div>
+    <!--
+      MUY IMPORTANTE!!!
+      Es un ejemplo de cómo tner un elemento de alerta común a toda una aplicación si fuese necesario.
+      Mediante distintos ng-content y distintos select, podemos hacer que desde el padre se pueda instanciar
+      el contenido que necesitamos en funciión de su es un pop-up, un alert, un formulario emergente...
+      Y siempre lo haremos utilizando este mismo componente, cumpliento con principio DRY.
+    -->
+  <div class="card">
+
+    <div class="header">
+      <ng-content select="h3"></ng-content>
+      <!--
+        Con el atributo select le estamos diciendo al componente en el que nos encontramos que vamos a recibir desde el contenido del mismo
+        dentro del padre (app.component.html) lo que especifiquemos en su valor, en este caso, todos los elementos <h3></h3> se renderizarán aquí.
+      -->      
+    </div>
+
+    <div class="message">
+      <ng-content></ng-content>
+      <!--
+        En <ng-content></ng-content> se va a renderizar todo el contenido interno a este componente que metamos desde el padre (app.component.html)
+      -->
+    </div>
+
+    <div class="footer">
+      <!--
+        Con el atributo select le estamos diciendo al componente en el que nos encontramos que vamos a recibir desde el contenido del mismo
+        dentro del padre (app.component.html) lo que especifiquemos en su valor, en este caso, todos los elementos <button></button> se renderizarán aquí.
+      -->    
+      <ng-content selector="button"></ng-content>
+    </div>
+  </div>
+
+</div>

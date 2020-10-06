@@ -1,0 +1,22 @@
+<h1>
+  <app-progress-bar [progress]="counterProgress"></app-progress-bar>
+
+  <!--[init], cada vez que se actualice totalCountDown se actualizará init-->
+  <!-- #countdown me permite acceder desde este html al template app-countdown-->
+  <app-countdown #countdown
+    [init]="totalCountdown" 
+    (onDecrease) = "updateProgress($event)"
+    (onComplete) = "countdownFinished()"
+  ></app-countdown>
+
+  <div class="initInput">
+    <label for="totalCountdownText">Init on: </label>
+    <input id="totalCountdownText" type="text" [(ngModel)]="totalCountdown">
+    <!-- 
+      ngModel devuelve el contenido de totalCountdown. Es como hacer {{}} fuera de un tag, 
+      pero de manera que si se modifica en la vista, también se modificará en el ts y viceversa.
+      -->
+  </div>
+  
+  <button (click)="countdown.startCountdown(); counterProgress=0;">RESTART</button>
+</h1>

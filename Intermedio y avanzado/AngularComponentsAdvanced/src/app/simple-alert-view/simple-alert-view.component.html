@@ -1,0 +1,25 @@
+<ng-container *ngIf="visible">
+  <!--
+    ng container es una dirctiva angular que nos permite encapsular elementos html
+    pero que no se va a renderizar en el DOM. De este modo, como este contenido se ha de mostrar
+    cuando nuestra propiedad sea visible=true, pero sólo tiene esa razón de ser, podemos usarlo.
+  -->
+  <div class="background"></div>
+
+  <div class="card">
+
+    <div class="header">
+      {{title}}
+    </div>
+
+    <div class="message">
+      {{message}}
+    </div>
+
+    <div class="footer">
+      <button (click)="dismiss()">Ok</button>
+    </div>
+
+  </div>
+
+</ng-container>
